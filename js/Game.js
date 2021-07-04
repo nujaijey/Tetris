@@ -32,13 +32,26 @@
         $("tr").eq(row).children("td").eq(col).addClass("c" + num);
     }
 
+    // 擦除画布
+    Game.prototype.clear = function () {
+        for (var i = 0; i < this.row; i++) {
+            for (var j = 0; j < this.col; j++) {
+                $("tr").eq(i).children("td").eq(j).removeClass();
+            }
+        }
+    }
+
     Game.prototype.start = function () {
         var self = this;
         this.timer = setInterval(function () {
+            // 清屏
+            self.clear();
             // 渲染方块
             self.block.render();
             // 渲染地图
             self.gameMap.render(self);
+            // 方块下落
+            self.block.checkDown();
         }, 500);
     }
 })();
