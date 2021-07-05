@@ -11,6 +11,8 @@
         this.gameMap = new GameMap(this);
         // 启动定时器
         this.start();
+        // 事件监听
+        this.bindEvent();
     }
 
     Game.prototype.init = function () {
@@ -39,6 +41,17 @@
                 $("tr").eq(i).children("td").eq(j).removeClass();
             }
         }
+    }
+
+    Game.prototype.bindEvent = function () {
+        // 声明self来备份this的原因：document对象的this指向window
+        var self = this;
+        // 键盘事件
+        $(document).keydown(function (event) {
+            if (event.keyCode == 37) {
+
+            }
+        })
     }
 
     Game.prototype.start = function () {

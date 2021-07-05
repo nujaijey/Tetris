@@ -49,6 +49,21 @@
         } else {
             // 此时就是下落到底的状态，渲染新的方块
             game.block = new Block();
+            // 方块到底要渲染到地图上
+            this.renderMap();
+        }
+    }
+
+    // 将已经到底的方块渲染到地图上
+    Block.prototype.renderMap = function () {
+        for (var i = 0; i < 4; i++) {
+            for (var j = 0; j < 4; j++) {
+                // 将现在已有的方块渲染到GameMap类的mapCode上
+                if (this.ranBlock[i][j] != 0) {
+                    // 改变地图的mapCode数据
+                    game.gameMap.mapCode[this.row + i][this.col + j] = this.ranBlock[i][j];
+                }
+            }
         }
     }
 })()
