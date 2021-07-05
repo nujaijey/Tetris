@@ -49,8 +49,19 @@
         // 键盘事件
         $(document).keydown(function (event) {
             if (event.keyCode == 37) {
-
+                // 判断是否有向左移动的能力
+                self.block.checkLeft();
+            } else if (event.keyCode == 39) {
+                // 判断是否有向右移动的能力
+                self.block.checkRight();
+            } else if (event.keyCode == 32) {
+                // 空格：一键到底
+                self.block.checkEnd();
+            } else if (event.keyCode == 38) {
+                // 方块旋转
+                self.block.checkRot();
             }
+
         })
     }
 
