@@ -15,8 +15,9 @@
         this.row = 0;
         this.col = 4;
     }
+
+    // 渲染四行四列的方块
     Block.prototype.render = function () {
-        // 渲染四行四列的方块
         for (var i = 0; i < 4; i++) {
             for (var j = 0; j < 4; j++) {
                 // 不为0的位置渲染颜色
@@ -27,9 +28,9 @@
         }
     }
 
+    // check函数的row和col指的是要校验的地图的row和col的位置
+    // 能力判断方法，判断的是对应位置的方块和地图是否有都不为0的情况，如果有返回false，否则返回true；true就代表没有重合
     Block.prototype.check = function (row, col) {
-        // check函数的row和col指的是要校验的地图的row和col的位置
-        // 能力判断方法，判断的是对应位置的方块和地图是否有都不为0的情况，如果有返回false，否则返回true；true就代表没有重合
         for (var i = 0; i < 4; i++) {
             for (var j = 0; j < 4; j++) {
                 if (this.ranBlock[i][j] != 0 && game.gameMap.mapCode[i + row][j + col] != 0) {
@@ -51,6 +52,10 @@
             game.block = new Block();
             // 方块到底要渲染到地图上
             this.renderMap();
+            // 判断是否可以消行（整行都不为0）
+            game.gameMap.checkRemove();
+            // 判断是否游戏结束（方块到顶）
+            game.block.checkOver();
         }
     }
 
@@ -104,5 +109,16 @@
                 }
             }
         }
+    }
+
+    // 判断是否游戏结束（方块到顶）
+    Block.prototype.checkOver = function () {
+        for (var i = 0; i < game.col; i++) {
+            if (game.gameMap.mapCode[0][i] != 0) {
+                clearInterval(game.timer);
+                alert("游戏结束");
+            }
+        }
+
     }
 })()

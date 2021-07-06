@@ -29,6 +29,7 @@
         $table.appendTo("body");
     }
 
+    // 设置颜色的方法
     Game.prototype.setColor = function (row, col, num) {
         // 给对应有颜色的方块添加类名
         $("tr").eq(row).children("td").eq(col).addClass("c" + num);
@@ -43,6 +44,7 @@
         }
     }
 
+    // 设置键盘的事件监听
     Game.prototype.bindEvent = function () {
         // 声明self来备份this的原因：document对象的this指向window
         var self = this;
