@@ -48,14 +48,16 @@
         if (this.check(this.row + 1, this.col)) {
             this.row++;
         } else {
-            // 此时就是下落到底的状态，渲染新的方块
-            game.block = new Block();
+            // 此时就是下落到底的状态，下一个方块为预览框的方块
+            game.block = game.nextBlock;
+            // 预览框再次渲染新的方块
+            game.nextBlock = new Block();
             // 方块到底要渲染到地图上
             this.renderMap();
             // 判断是否可以消行（整行都不为0）
             game.gameMap.checkRemove();
             // 判断是否游戏结束（方块到顶）
-            game.block.checkOver();
+            this.checkOver();
         }
     }
 
@@ -116,7 +118,7 @@
         for (var i = 0; i < game.col; i++) {
             if (game.gameMap.mapCode[0][i] != 0) {
                 clearInterval(game.timer);
-                alert("游戏结束");
+                alert("游戏结束！您当前的得分为：" + game.score);
             }
         }
 
